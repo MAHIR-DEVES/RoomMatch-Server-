@@ -45,6 +45,20 @@ async function run() {
       res.send(result);
     });
 
+    //
+    app.get('/posts/:id', async (req, res) => {
+      const id = req.params.id;
+      try {
+        const post = await postsCollections.findOne({ _id: new ObjectId(id) });
+        if (!post) {
+          return res.status(404).send({ message: 'Post not found' });
+        }
+        res.send(post);
+      } catch (error) {
+        res.status(500).send({ message: 'Error fetching post', error });
+      }
+    });
+
     // Send a ping to confirm a successful connection
     await client.db('admin').command({ ping: 1 });
     console.log(
