@@ -32,6 +32,11 @@ async function run() {
       const result = await postsCollections.insertOne(newPost);
       res.send(result);
     });
+    //
+    app.get('/posts', async (req, res) => {
+      const result = await postsCollections.find().limit(6).toArray();
+      res.send(result);
+    });
 
     // Send a ping to confirm a successful connection
     await client.db('admin').command({ ping: 1 });
