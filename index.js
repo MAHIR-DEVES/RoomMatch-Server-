@@ -32,9 +32,16 @@ async function run() {
       const result = await postsCollections.insertOne(newPost);
       res.send(result);
     });
+
     //
     app.get('/posts', async (req, res) => {
       const result = await postsCollections.find().limit(6).toArray();
+      res.send(result);
+    });
+
+    //
+    app.get('/AllPosts', async (req, res) => {
+      const result = await postsCollections.find().toArray();
       res.send(result);
     });
 
