@@ -75,6 +75,23 @@ async function run() {
         res.status(500).send({ message: 'Error fetching posts', error });
       }
     });
+    //
+    // Update a post
+    app.put('/posts/:id', async (req, res) => {
+      const id = req.params.id;
+      const updatedData = req.body;
+
+      try {
+        const filter = { _id: new ObjectId(id) };
+        const updateDoc = {
+          $set: updatedData,
+        };
+        const result = await postsCollections.updateOne(filter, updateDoc);
+        res.send(result);
+      } catch (error) {
+        res.status(500).send({ message: 'Error updating post', error });
+      }
+    });
 
     //
     app.delete('/posts/:id', async (req, res) => {
