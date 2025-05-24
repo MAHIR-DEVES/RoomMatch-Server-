@@ -61,7 +61,6 @@ async function run() {
       }
     });
 
-    //
     // get email data
     app.get('/my-posts/:email', async (req, res) => {
       const email = req.params.email;
@@ -72,7 +71,7 @@ async function run() {
         res.status(500).send({ message: 'Error fetching posts', error });
       }
     });
-    //
+
     // Update a post
     app.put('/posts/:id', async (req, res) => {
       const id = req.params.id;
@@ -135,9 +134,9 @@ async function run() {
 run().catch(console.dir);
 
 app.get('/', (req, res) => {
-  res.send('assigment server running');
+  res.send('assignment server running');
 });
 
 app.listen(port, () => {
-  console.log(`assigment server in running on port${port}`);
+  console.log(`assignment server in running on port${port}`);
 });
