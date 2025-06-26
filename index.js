@@ -48,6 +48,39 @@ async function run() {
     });
 
     //
+    app.get('/toggleAscending', async (req, res) => {
+      const toggleValue = req.query.toggle;
+      const convertValue = parseInt(toggleValue);
+
+      try {
+        const posts = await postsCollections
+          .find()
+          .sort({
+            location: convertValue,
+          })
+          .toArray();
+        res.send(posts);
+        console.log(posts);
+      } catch (err) {
+        console.log(err);
+      }
+    });
+
+    //
+    app.get('/toggleAvailable', async (req, res) => {
+      const availability = req.query.availability;
+      try {
+        const posts = await postsCollections
+          .find({ availability: availability })
+          .toArray();
+        res.send(posts);
+      } catch (err) {
+        console.log(err);
+      }
+      console.log(posts);
+    });
+
+    //
     app.get('/posts/:id', async (req, res) => {
       const id = req.params.id;
       try {
