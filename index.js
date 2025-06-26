@@ -36,7 +36,7 @@ async function run() {
         .find({
           availability: 'available',
         })
-        .limit(6)
+        .limit(8)
         .toArray();
       res.send(result);
     });
